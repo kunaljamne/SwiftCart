@@ -1,0 +1,77 @@
+package in.scalive.swiftcart.service;
+
+import org.springframework.stereotype.Service;
+
+import in.scalive.swiftcart.dto.request.AddToCartRequestDTO;
+import in.scalive.swiftcart.dto.request.UpdateCartItemRequestDTO;
+import in.scalive.swiftcart.dto.response.CartItemResponseDTO;
+import in.scalive.swiftcart.dto.response.CartResponseDTO;
+import jakarta.transaction.Transactional;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+//cart service imp dono cartitem or cart ke kaam samhal legi ham alga
+//alag service nhi bana rhe cart or cartitem ko manage krne ke liye
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class CartServiceImpl implements CartService {
+
+	@Override
+	public CartResponseDTO getCartByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO addItemToCart(Long userId, AddToCartRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO updateCartItem(Long userId, Long cartItemId, UpdateCartItemRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO removeItemFromCart(Long userId, Long cartItemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO clearCart(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartItemResponseDTO getCartItem(Long userId, Long cartItemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isProductInCart(Long userId, Long productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO incrementItemQuantity(Long userId, Long productId, int quantity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartResponseDTO decrementItemQuantity(Long userId, Long productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,87 @@
+package in.scalive.swiftcart.service;
+
+import java.util.List;
+
+import org.hibernate.query.Page;
+import org.springframework.stereotype.Service;
+
+import in.scalive.swiftcart.dto.request.PlaceOrderRequestDTO;
+import in.scalive.swiftcart.dto.request.UpdateCartItemRequestDTO;
+import in.scalive.swiftcart.dto.response.OrderResponseDTO;
+import in.scalive.swiftcart.dto.response.PageResponseDTO;
+import in.scalive.swiftcart.entity.Order;
+import in.scalive.swiftcart.repository.CartRepository;
+import in.scalive.swiftcart.repository.OrderItemRepository;
+import in.scalive.swiftcart.repository.OrderRepository;
+import in.scalive.swiftcart.repository.ProductRepository;
+import in.scalive.swiftcart.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class OrderServiceImpl implements OrderService {
+	
+	private final OrderRepository orderRepo;
+	private final OrderItemRepository orderItemRepo;
+	private final CartRepository cartRepo;
+	private final UserRepository userRepo;
+	private final ProductRepository prodRepo;
+	
+	
+//	Helper: Map page to pageResponseDTO
+	private PageResponseDTO<OrderResponseDTO> mapTPageResponseDTO(Page<Order> orderPage){
+		
+	}
+	
+	
+	@Override
+	public OrderResponseDTO placeOrder(PlaceOrderRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO getOrderById(Long orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO getOrderByOrderNumber(String orderNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<OrderResponseDTO> getOrdersByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PageResponseDTO<OrderResponseDTO> getAllOrdersPaginated(int page, int size, String sortBy, String sortDir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<OrderResponseDTO> getOrdersByStatus(String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO updateOrderStatus(Long orderId, UpdateCartItemRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO cancelOrder(Long orderId, String reason) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PageResponseDTO<OrderResponseDTO> searchOrders(String keyword, int page, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+}

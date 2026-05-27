@@ -1,0 +1,66 @@
+package in.scalive.swiftcart.controller;
+
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.scalive.swiftcart.dto.request.PlaceOrderRequestDTO;
+import in.scalive.swiftcart.dto.response.ApiResponseDTO;
+import in.scalive.swiftcart.dto.response.OrderResponseDTO;
+import in.scalive.swiftcart.dto.response.PageResponseDTO;
+import in.scalive.swiftcart.service.OrderService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/orders")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+public class OrderController {
+	private final OrderService serv;
+	
+	@PostMapping("/placeOrder")
+	public ResponseEntity<ApiResponseDTO<OrderResponseDTO>> placeOrder(@Valid @RequestBody PlaceOrderRequestDTO dto){
+		OrderResponseDTO placeOrder = serv.placeOrder(dto);
+		
+		return new  ResponseEntity<>(ApiResponseDTO.success("OrderPlace successfully",placeOrder),HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{orderId}")
+	public ResponseEntity<ApiResponseDTO<OrderResponseDTO>> getOrderById(@PathVariable Long orderId){
+		OrderResponseDTO order = serv.getOrderById(orderId);
+		ApiResponseDTO<OrderResponseDTO> responseDTO=ApiResponseDTO.success(order);
+		return ResponseEntity.ok(responseDTO);
+	}
+	
+	@GetMapping("/number/{orderNum}")
+	public ResponseEntity<ApiResponseDTO<OrderResponseDTO>> getOrderByOrderNumber(@PathVariable String orderNum){
+		OrderResponseDTO order = serv.getOrderByOrderNumber(orderNum);
+		ApiResponseDTO<OrderResponseDTO> responseDTO=ApiResponseDTO.success(order);
+		return ResponseEntity.ok(responseDTO);
+	}
+	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<ApiResponseDTO<List<OrderResponseDTO>>> getOrdersByUserId(@PathVariable Long userId){
+		List<OrderResponseDTO> orders = serv.getOrdersByUserId(userId);
+		return ResponseEntity.ok(ApiResponseDTO.success("Fected: "+orders.size()+" Orders"+orders));
+	}
+	
+	@GetMapping
+	public ResponseEntity<ApiResponseDTO<PageResponseDTO<OrderResponseDTO>>> getAllOrdersPaginated(@RequestParam(defaultValue = "0")int page
+									,@RequestParam(defaultValue = "10")int size,
+									@RequestParam(defaultValue = "orderDate")String sortBy,
+									@RequestParam(defaultValue = "desc")String SortDir){
+		PageResponseDTO<OrderResponseDTO> orders = serv.getAllOrdersPaginated(page, size, sortBy, SortDir);
+		return ResponseEntity.ok(ApiResponseDTO.success(orders));
+	}
+}

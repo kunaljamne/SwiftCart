@@ -1,0 +1,127 @@
+package in.scalive.swiftcart.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import in.scalive.swiftcart.dto.request.PlaceOrderRequestDTO;
+import in.scalive.swiftcart.dto.request.UpdateCartItemRequestDTO;
+import in.scalive.swiftcart.dto.response.OrderItemResponseDTO;
+import in.scalive.swiftcart.dto.response.OrderResponseDTO;
+import in.scalive.swiftcart.dto.response.PageResponseDTO;
+import in.scalive.swiftcart.entity.Order;
+import in.scalive.swiftcart.entity.OrderItem;
+import in.scalive.swiftcart.repository.CartRepository;
+import in.scalive.swiftcart.repository.OrderItemRepository;
+import in.scalive.swiftcart.repository.OrderRepository;
+import in.scalive.swiftcart.repository.ProductRepository;
+import in.scalive.swiftcart.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class OrderServiceImpl implements OrderService {
+	
+	private final OrderRepository orderRepo;
+	private final OrderItemRepository orderItemRepo;
+	private final CartRepository cartRepo;
+	private final UserRepository userRepo;
+	private final ProductRepository prodRepo;
+	//Helper : map orderItem to OrderItemResponseDTO
+	private OrderItemResponseDTO mapToOrderItemResponseDTO(OrderItem orderItem) {
+		return null;
+	}
+	
+//	Helper: map order to orderResponseDTO
+	private OrderResponseDTO mapToOrderResponseDTO(Order order) {
+		List<OrderItemResponseDTO> items=new ArrayList<>();
+		for(OrderItem orderItem:order.getOrderItems()) {
+			items.add(mapToOrderItemResponseDTO(orderItem));
+		}
+		
+		int totalItems=0;
+		for(OrderItem orderItem:order.getOrderItems()) {
+			totalItems+=orderItem.getQuantity();
+		}
+		
+		return OrderResponseDTO.builder()
+				.id(order.getId())
+				.orderNumber(order.getOrderNumber())
+	}
+	
+//	Helper: Map page to pageResponseDTO
+	private PageResponseDTO<OrderResponseDTO> mapTPageResponseDTO(Page<Order> orderPage){
+		List<OrderResponseDTO> orders=new ArrayList<>();
+		for(Order order:orderPage.getContent()) {
+			orders.add(mapToOrderResponseDTO(order));
+		}
+		 
+		return PageResponseDTO.<OrderResponseDTO>builder()
+				.content(orders)
+				.pageNumber(orderPage.getNumber())
+				.pageSize(orderPage.getSize())
+				.totalElements(orderPage.getTotalElements())
+				.totalPages(orderPage.getTotalPages())
+				.first(orderPage.isFirst())
+				.last(orderPage.isLast())
+				.hasNext(orderPage.hasNext())
+				.hasPrevious(orderPage.hasPrevious())
+				.build();
+	}
+	
+	
+
+
+	@Override
+	public OrderResponseDTO placeOrder(PlaceOrderRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO getOrderById(Long orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO getOrderByOrderNumber(String orderNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<OrderResponseDTO> getOrdersByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PageResponseDTO<OrderResponseDTO> getAllOrdersPaginated(int page, int size, String sortBy, String sortDir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<OrderResponseDTO> getOrdersByStatus(String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO updateOrderStatus(Long orderId, UpdateCartItemRequestDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrderResponseDTO cancelOrder(Long orderId, String reason) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PageResponseDTO<OrderResponseDTO> searchOrders(String keyword, int page, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+}

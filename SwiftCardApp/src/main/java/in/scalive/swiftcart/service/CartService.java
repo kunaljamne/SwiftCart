@@ -1,0 +1,19 @@
+package in.scalive.swiftcart.service;
+
+import in.scalive.swiftcart.dto.request.AddToCartRequestDTO;
+import in.scalive.swiftcart.dto.request.UpdateCartItemRequestDTO;
+import in.scalive.swiftcart.dto.response.CartItemResponseDTO;
+import in.scalive.swiftcart.dto.response.CartResponseDTO;
+
+public interface CartService {
+	CartResponseDTO getCartByUserId(Long userId);
+	CartResponseDTO addItemToCart(Long userId,AddToCartRequestDTO dto);
+	CartResponseDTO updateCartItem(Long userId, Long cartItemId,UpdateCartItemRequestDTO dto);
+	CartResponseDTO removeItemFromCart(Long userId,Long cartItemId);
+	CartResponseDTO clearCart(Long userId);
+	CartItemResponseDTO getCartItem(Long userId,Long cartItemId);
+	Boolean isProductInCart(Long userId,Long productId);
+	CartResponseDTO incrementItemQuantity(Long userId,Long productId,int quantity);
+	CartResponseDTO decrementItemQuantity(Long userId,Long productId,int quantity);
+	
+}
